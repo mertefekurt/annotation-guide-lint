@@ -6,12 +6,12 @@
 
 Check annotation guides for ambiguous labels and missing tie-break rules. It solves review drift by turning plain-text plans into deterministic CI-friendly findings.
 
-## Input Contract 19
+## Input Contract
 
 Accepts annotation guide markdown. The reader supports plain text, JSON, JSONL, and CSV so the
 tool can fit into scripts, CI jobs, and review exports.
 
-## CLI Walkthrough 19
+## CLI Walkthrough
 
 ```bash
 python -m pip install -e ".[dev]"
@@ -20,7 +20,7 @@ annotation-guide-lint examples/sample.txt --json --fail-on medium
 python -m annotation_guide_lint --help
 ```
 
-## Rule Surface 19
+## Rule Surface
 
 | Rule | Severity | Meaning |
 |---|---:|---|
@@ -28,7 +28,7 @@ python -m annotation_guide_lint --help
 | `missing-examples` | medium | examples are missing |
 | `missing-tiebreak` | low | tie-break rule missing |
 
-## Validation Notes 19
+## Validation Notes
 
 ```bash
 ruff check .
