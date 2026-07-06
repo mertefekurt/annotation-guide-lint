@@ -1,36 +1,32 @@
 # Annotation Guide Lint
 
-| | |
-| --- | --- |
-| Focus | annotation quality |
-| Command | `annotation-guide-lint` |
-| Inputs | text, JSON, JSONL, or CSV |
-| Output | Markdown or JSON |
+Check annotation guides for ambiguous labels and missing tie-break rules. The command is intentionally direct so it can sit in a local review, a CI step, or a one-off audit.
 
 ![Annotation Guide Lint cover](assets/readme-cover.svg)
 
-Check annotation guides for ambiguous labels and missing tie-break rules. The repository is intentionally plain: a small command, a visible rule surface, and enough examples to make the behavior inspectable.
+## Checks in plain language
 
-## Policy surface
+- `ambiguous-label` - ambiguous label guidance (high); clarify label definition.
+- `missing-examples` - examples are missing (medium); add positive and negative examples.
+- `missing-tiebreak` - tie-break rule missing (low); define adjudication rule.
 
-| Rule | Level | Why it matters |
-| --- | --- | --- |
-| `ambiguous-label` | high | ambiguous label guidance |
-| `missing-examples` | medium | examples are missing |
-| `missing-tiebreak` | low | tie-break rule missing |
+## Finding map
 
-## Local run
+![Workflow diagram](assets/readme-diagram.svg)
+
+## Local check
 
 ```bash
 git clone https://github.com/mertefekurt/annotation-guide-lint.git
 cd annotation-guide-lint
-python -m venv .venv
-source .venv/bin/activate
 python -m pip install -e ".[dev]"
 annotation-guide-lint examples/sample.txt
-annotation-guide-lint examples/sample.txt --json
 ```
 
-## Why the sample fails
+## Check before changing
 
-`label positive ambiguous examples missing tie_break none` is intentionally shaped to hit the rules above, so it is useful as a quick smoke test after edits.
+```bash
+ruff check .
+pytest
+python -m annotation_guide_lint --help
+```
