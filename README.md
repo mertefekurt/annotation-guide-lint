@@ -1,46 +1,36 @@
 # Annotation Guide Lint
 
-<p align="center">
-  <img src="assets/readme-cover.svg" alt="Annotation Guide Lint cover" width="100%" />
-</p>
+| | |
+| --- | --- |
+| Focus | annotation quality |
+| Command | `annotation-guide-lint` |
+| Inputs | text, JSON, JSONL, or CSV |
+| Output | Markdown or JSON |
 
-![stack](https://img.shields.io/badge/stack-Python-7c3aed?style=flat-square) ![python](https://img.shields.io/badge/python-3.11-0891b2?style=flat-square) ![license](https://img.shields.io/badge/license-MIT-b45309?style=flat-square) ![ci](https://img.shields.io/badge/ci-GitHub%20Actions-be185d?style=flat-square)
+![Annotation Guide Lint cover](assets/readme-cover.svg)
 
-Check annotation guides for ambiguous labels and missing tie-break rules.
+Check annotation guides for ambiguous labels and missing tie-break rules. The repository is intentionally plain: a small command, a visible rule surface, and enough examples to make the behavior inspectable.
 
-## The short version
+## Policy surface
 
-`annotation-guide-lint` is intentionally small: feed it a file, get deterministic findings, and decide whether the result should block a merge or just guide cleanup.
-
-## Rule surface
-
-| Rule | Severity | What it catches |
+| Rule | Level | Why it matters |
 | --- | --- | --- |
 | `ambiguous-label` | high | ambiguous label guidance |
 | `missing-examples` | medium | examples are missing |
 | `missing-tiebreak` | low | tie-break rule missing |
 
-## Usage
+## Local run
 
 ```bash
+git clone https://github.com/mertefekurt/annotation-guide-lint.git
+cd annotation-guide-lint
+python -m venv .venv
+source .venv/bin/activate
 python -m pip install -e ".[dev]"
 annotation-guide-lint examples/sample.txt
-annotation-guide-lint examples/sample.txt --json --fail-on medium
+annotation-guide-lint examples/sample.txt --json
 ```
 
-## Useful defaults
+## Why the sample fails
 
-| Option | Reason |
-| --- | --- |
-| `--json` | machine-readable output for scripts |
-| `--fail-on medium` | stricter CI gate when warnings matter |
-| `--format auto` | let the reader detect text, CSV, JSON, or JSONL |
-
-## Local checks
-
-```bash
-python -m pip install -e ".[dev]"
-ruff check .
-pytest
-python -m annotation_guide_lint --help
-```
+`label positive ambiguous examples missing tie_break none` is intentionally shaped to hit the rules above, so it is useful as a quick smoke test after edits.
