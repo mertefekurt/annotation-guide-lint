@@ -1,20 +1,12 @@
 # Annotation Guide Lint
 
-Check annotation guides for ambiguous labels and missing tie-break rules. The command is intentionally direct so it can sit in a local review, a CI step, or a one-off audit.
-
 ![Annotation Guide Lint cover](assets/readme-cover.svg)
 
-## Checks in plain language
+Check annotation guides for ambiguous labels and missing tie-break rules.
 
-- `ambiguous-label` - ambiguous label guidance (high); clarify label definition.
-- `missing-examples` - examples are missing (medium); add positive and negative examples.
-- `missing-tiebreak` - tie-break rule missing (low); define adjudication rule.
+`Python`
 
-## Finding map
-
-![Workflow diagram](assets/readme-diagram.svg)
-
-## Local check
+## Start here
 
 ```bash
 git clone https://github.com/mertefekurt/annotation-guide-lint.git
@@ -23,10 +15,8 @@ python -m pip install -e ".[dev]"
 annotation-guide-lint examples/sample.txt
 ```
 
-## Check before changing
+## Repository
 
-```bash
-ruff check .
-pytest
-python -m annotation_guide_lint --help
-```
+[Open the source on GitHub →](https://github.com/mertefekurt/annotation-guide-lint)
+
+[MIT License](LICENSE)
